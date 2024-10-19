@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">chatting app</string>
+    <string name="ng_nh_p_ti_p_t_c">Đăng nhập để tiếp tục</string>
+    <string name="ch_o_m_ng_tr_l_i">Chào mừng trở lại!</string>
+    <string name="email">Email</string>
+    <string name="password">password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="create_new_account">create_new_account</string>
+    <string name="add_image">Add Image</string>
+    <string name="name">Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="Sign_in" />
+    <string name="signin">Sign_in</string>
+    <string name="Email">Email</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="Password">Password</string>
+    <string name="Sign_In">Sign In</string>
+</resources>
