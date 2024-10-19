@@ -15,6 +15,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.chattingapp.databinding.ActivitySignUpBinding;
 import com.example.chattingapp.utilities.Contants;
+import com.example.chattingapp.utilities.PreferenceManager;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -25,6 +26,7 @@ import java.util.HashMap;
 
 public class SignUpActivity extends AppCompatActivity {
     private ActivitySignUpBinding binding;
+    private PreferenceManager preferenceManager;
     private String encodedImage;
 
     @Override
@@ -32,6 +34,8 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding =ActivitySignUpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        preferenceManager = new PreferenceManager(getApplicationContext());
+        setListeners();
 
     }
     private void setListeners(){
@@ -62,10 +66,19 @@ public class SignUpActivity extends AppCompatActivity {
         database.collection(Contants.KEY_COLLECTION_USERS)
                 .add(user)
                 .addOnSuccessListener(documentReference -> {
+                    loading(false);
+                    preferenceManager.putBoolean(Contants.KEY_IS_SIGNED_IN, true);
+                    preferenceManager.putString(Contants.KEY_USER_ID, documentReference.getId());
+                    preferenceManager.putString(Contants.KEY_NAME, binding.inputName.getText().toString());
+                    preferenceManager.putString(Contants.KEY_IMAGE, encodedImage);
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.addFlags((Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                    startActivity(intent);
 
                 })
                 .addOnFailureListener(exception -> {
-
+                    loading(false);
+                    showToast(exception.getMessage());
                 });
 
 

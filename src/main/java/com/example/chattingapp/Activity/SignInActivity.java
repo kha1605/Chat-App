@@ -1,24 +1,12 @@
 package com.example.chattingapp.Activity;
 
-import static android.app.ProgressDialog.show;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-import com.example.chattingapp.R;
 import com.example.chattingapp.databinding.ActivitySignInBinding;
-import com.google.firebase.ktx.Firebase;
-
 import java.util.HashMap;
-import java.util.Objects;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SignInActivity extends AppCompatActivity {

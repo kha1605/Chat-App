@@ -15,4 +15,5 @@
     <string name="sign_up">Sign Up</string>
     <string name="Password">Password</string>
     <string name="Sign_In">Sign In</string>
+    <string name="CreateNewAcount">Create New Account</string>
 </resources>
