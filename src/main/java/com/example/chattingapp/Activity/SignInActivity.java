@@ -51,10 +51,16 @@ public class SignInActivity extends AppCompatActivity {
                 .whereEqualTo(Contants.KEY_PASSWORD, binding.password.getText().toString())
                 .get()
                 .addOnCompleteListener(task -> {
-                    if (task.isSuccessful() && task.getResult() != null  && task.getResult().getDocuments().size() >0){
+                    if (task.isSuccessful() && task.getResult() != null && task.getResult().getDocuments().size() > 0) {
                         DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
+
+                        // Lưu thông tin người dùng vào PreferenceManager
                         preferenceManager.putBoolean(Contants.KEY_IS_SIGNED_IN, true);
                         preferenceManager.putString(Contants.KEY_USER_ID, documentSnapshot.getId());
+                        preferenceManager.putString(Contants.KEY_NAME, documentSnapshot.getString(Contants.KEY_NAME));
+                        preferenceManager.putString(Contants.KEY_IMAGE, documentSnapshot.getString(Contants.KEY_IMAGE));
+
+                        // Chuyển tới MainActivity
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
@@ -65,6 +71,7 @@ public class SignInActivity extends AppCompatActivity {
                     }
                 });
     }
+
     private  void loading(Boolean isLoading){
         if(isLoading){
             binding.buttonSignin.setVisibility(View.INVISIBLE);

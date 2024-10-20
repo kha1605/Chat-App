@@ -5,16 +5,18 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.chattingapp.R;
 import com.example.chattingapp.databinding.ActivityMainBinding;
 import com.example.chattingapp.utilities.Contants;
 import com.example.chattingapp.utilities.PreferenceManager;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.messaging.Constants;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.HashMap;
@@ -35,11 +37,15 @@ public class MainActivity extends AppCompatActivity {
     }
     private void setListeners(){
         binding.imageSignout.setOnClickListener(v ->signOut());
+        binding.fabnewchat.setOnClickListener(v->
+                startActivity(new Intent(getApplicationContext(), UserActivity.class)));
     }
+
+
     private void loadUserDetails(){
-        binding.textName.setText(preferenceManager.getString(Contants.KEY_NAME));
-        byte[] bytes = Base64.decode(preferenceManager.getString(Contants.KEY_IMAGE), Base64.DEFAULT);
-        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes , 0,bytes.length);
+        binding.textName.setText(preferenceManager.getString((Contants.KEY_NAME)));
+        byte[] bytes = Base64.decode(preferenceManager.getString(Contants.KEY_IMAGE) , Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         binding.imageProfile.setImageBitmap(bitmap);
 
     }
@@ -57,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                         preferenceManager.getString(Contants.KEY_USER_ID)
                 );
         documentReference.update(Contants.KEY_FCM_TOKEN, token)
-                .addOnSuccessListener(unused -> showToast("Token updated succesfully"))
+
                 .addOnFailureListener(e -> showToast("unable to up date token"));
 
     }
@@ -77,4 +83,9 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .addOnFailureListener(e -> showToast("Unable to sign out"));
     }
-}
+
+
+
+
+    }
+

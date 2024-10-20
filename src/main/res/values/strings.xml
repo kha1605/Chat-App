@@ -16,4 +16,6 @@
     <string name="Password">Password</string>
     <string name="Sign_In">Sign In</string>
     <string name="CreateNewAcount">Create New Account</string>
+    <string name="select_user">select user</string>
+    <string name="type_a_message">Type a message</string>
 </resources>
